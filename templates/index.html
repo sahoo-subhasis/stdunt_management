@@ -1,0 +1,114 @@
+{% extends 'base.html' %}           
+{% block title %}HOME{%  endblock title %}
+{% block body  %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/login">ASCoding</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/login">Home</a>
+        </li>
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="/student">Register</a>
+        </li>
+
+        
+
+      {% if current_user.is_authenticated %}
+       
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Welcome {{current_user.Name}}</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+            <li><a class="dropdown-item" href="/deleteacc">Delete Account</a></li>
+          </ul>
+        </li>
+      
+        {% endif %}
+
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% with messages=get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{message}}
+
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+</div>
+
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+
+
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="static/images/b61.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+            <h4>WELCOME TO ASCoding</h4>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <img src="static/images/b51.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+            <h4>We provide the best coding courses</h4>
+        </div>
+      </div>
+
+
+      <div class="carousel-item">
+        <img src="static/images/v1.jpg" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+            <h4>Hope you like our services</h4>
+        </div>
+      </div>
+    </div>
+
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+
+  <footer>
+    <p style="text-align:center">Feel Free to Contact Us At<br>
+    <a href="mailto:ascoding@gmail.com">ascoding@gmail.com</a>
+      <br>
+      &copy; ASCoding
+  </p>
+  </footer>
+
+{% endblock body  %}

@@ -1,0 +1,103 @@
+{% extends 'base.html' %}           
+{% block title %}Student Details{%  endblock title %}
+{% block body  %}
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/login">ASCoding</a>
+  
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page"  href="/login">Home</a>
+          </li>
+  
+  
+          <li class="nav-item">
+            <a class="nav-link" href="/student">Register</a>
+          </li>
+  
+          
+  
+        {% if current_user.is_authenticated %}
+         
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Welcome {{current_user.Name}}</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/logout">Logout</a></li>
+              <li><a class="dropdown-item" href="/deleteacc">Delete Account</a></li>
+            </ul>
+          </li>
+        
+          {% endif %}
+  
+  
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+<br>
+{% with messages=get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{message}}
+
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    
+  </div>
+
+
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+<br>
+    <div class="container mt-4">
+    <table class="table table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Regno</th>
+            <th scope="col">Name</th>
+            <th scope="col">Grade</th>
+            <th scope="col">Parents Name</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Date of Admission</th>
+            <th scope="col">Amount Paid</th>
+            <th scope="col">Batch No</th>
+            <th scope="col">Batch Start Date</th>
+            <th scope="col">Batch Timing</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+        {% for post in query %}
+            <tr>
+            <th scope="row">{{post.RegNo}}</th>
+            <td>{{post.Firstname}} {{post.Lastname}}</td>
+            <td>{{post.Grade}}</td>
+            <td>{{post.ParentName}}</td>
+            <td>{{post.ContactDetails}}</td>
+            <td>{{post.DateofAdmission}}</td>
+            <td>{{post.AmountPaid}}</td>
+            <td>{{post.BatchNo}}</td>
+            <td>{{post.BatchStartDate}}</td>
+            <td>{{post.BatchTiming}}</td>
+          </tr>
+          <tr>
+        {% endfor %}
+
+
+        </tbody>
+      </table>    
+    </div>
+    
+{% endblock body  %}
